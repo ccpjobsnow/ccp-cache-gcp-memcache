@@ -3,6 +3,7 @@ package com.ccp.implementations.cache;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.ccp.constantes.CcpConstants;
 import com.ccp.decorators.CcpMapDecorator;
 import com.ccp.dependency.injection.CcpImplementation;
 import com.ccp.especifications.cache.CcpCache;
@@ -41,9 +42,7 @@ public class CcpMemCacheGcp implements CcpCache {
 		if (object != null) {
 			return (V) object;
 		}
-
-		CcpMapDecorator values = new CcpMapDecorator(new CcpMapDecorator());// TODO ???
-		V value = taskToGetValue.getValue(values);
+		V value = taskToGetValue.getValue(CcpConstants.emptyJson);
 		this.put(key, value, cacheSeconds);
 
 		return value;
