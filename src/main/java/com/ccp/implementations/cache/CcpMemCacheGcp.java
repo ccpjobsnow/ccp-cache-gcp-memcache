@@ -7,7 +7,7 @@ import com.ccp.constantes.CcpConstants;
 import com.ccp.decorators.CcpMapDecorator;
 import com.ccp.dependency.injection.CcpImplementation;
 import com.ccp.especifications.cache.CcpCache;
-import com.ccp.especifications.cache.CcpTaskCache;
+import com.ccp.process.CcpMapTransform;
 import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
@@ -35,14 +35,14 @@ public class CcpMemCacheGcp implements CcpCache {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <V> V get(String key, CcpTaskCache<V> taskToGetValue, int cacheSeconds) {
+	public <V> V get(String key, CcpMapTransform<V> taskToGetValue, int cacheSeconds) {
 
 		Object object = this.get(key);
 
 		if (object != null) {
 			return (V) object;
 		}
-		V value = taskToGetValue.getValue(CcpConstants.emptyJson);
+		V value = taskToGetValue.transform(CcpConstants.emptyJson);
 		this.put(key, value, cacheSeconds);
 
 		return value;
