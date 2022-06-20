@@ -5,15 +5,13 @@ import java.util.Map;
 
 import com.ccp.constantes.CcpConstants;
 import com.ccp.decorators.CcpMapDecorator;
-import com.ccp.dependency.injection.CcpImplementation;
 import com.ccp.especifications.cache.CcpCache;
 import com.ccp.process.CcpMapTransform;
 import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
-@CcpImplementation
-public class CcpMemCacheGcp implements CcpCache {
+class MemCacheGcp implements CcpCache {
 	private static MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
 
 	@SuppressWarnings("unchecked")
