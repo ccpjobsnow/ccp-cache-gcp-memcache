@@ -3,7 +3,6 @@ package com.ccp.implementations.cache;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.ccp.constantes.CcpConstants;
 import com.ccp.decorators.CcpMapDecorator;
 import com.ccp.especifications.cache.CcpCache;
 import com.ccp.process.CcpMapTransform;
@@ -33,14 +32,14 @@ class MemCacheGcp implements CcpCache {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <V> V get(String key, CcpMapTransform<V> taskToGetValue, int cacheSeconds) {
+	public <V> V get(String key, CcpMapDecorator values, CcpMapTransform<V> taskToGetValue, int cacheSeconds) {
 
 		Object object = this.get(key);
 
 		if (object != null) {
 			return (V) object;
 		}
-		V value = taskToGetValue.transform(CcpConstants.emptyJson);
+		V value = taskToGetValue.transform(values);
 		this.put(key, value, cacheSeconds);
 
 		return value;
