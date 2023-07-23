@@ -1,4 +1,4 @@
-package com.ccp.implementations.cache;
+package com.ccp.implementations.cache.gcp.memcache;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
