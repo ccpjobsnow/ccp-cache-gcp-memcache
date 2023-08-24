@@ -1,11 +1,11 @@
 package com.ccp.implementations.cache.gcp.memcache;
 
-import com.ccp.dependency.injection.CcpModuleExporter;
+import com.ccp.dependency.injection.CcpInstanceProvider;
 
-public class Cache implements CcpModuleExporter {
+public class Cache implements CcpInstanceProvider {
 
 	@Override
-	public Object export() {
+	public Object getInstance() {
 		return new MemCacheGcp();
 	}
 
