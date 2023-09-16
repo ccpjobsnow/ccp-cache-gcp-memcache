@@ -10,7 +10,7 @@ import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 
-class MemCacheGcp implements CcpCache {
+class GcpMemCache implements CcpCache {
 	private static MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
 
 	@SuppressWarnings("unchecked")
