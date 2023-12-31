@@ -3,7 +3,7 @@ package com.ccp.implementations.cache.gcp.memcache;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.ccp.decorators.CcpMapDecorator;
+import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.especifications.cache.CcpCache;
 import com.ccp.process.CcpMapTransform;
 import com.google.appengine.api.memcache.Expiration;
@@ -26,13 +26,13 @@ class GcpMemCache implements CcpCache {
 
 		Map<String, Object> map = (Map<String, Object>) object;
 
-		CcpMapDecorator jr = new CcpMapDecorator(map);
+		CcpJsonRepresentation jr = new CcpJsonRepresentation(map);
 		return jr;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <V> V get(String key, CcpMapDecorator values, CcpMapTransform<V> taskToGetValue, int cacheSeconds) {
+	public <V> V get(String key, CcpJsonRepresentation values, CcpMapTransform<V> taskToGetValue, int cacheSeconds) {
 
 		Object object = this.get(key);
 
@@ -78,8 +78,8 @@ class GcpMemCache implements CcpCache {
 	@Override
 	public void put(String key, Object value, int secondsDelay) {
 		Expiration arg2 = Expiration.byDeltaSeconds(secondsDelay);
-		if(value instanceof CcpMapDecorator) {
-			CcpMapDecorator jr = (CcpMapDecorator)value;
+		if(value instanceof CcpJsonRepresentation) {
+			CcpJsonRepresentation jr = (CcpJsonRepresentation)value;
 			value = new LinkedHashMap<>(jr.content);
 		}
 		memcacheService.put(key, value, arg2);
