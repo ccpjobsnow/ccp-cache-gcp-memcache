@@ -4,7 +4,7 @@ import com.ccp.dependency.injection.CcpInstanceProvider;
 
 public class CcpGcpMemCache implements CcpInstanceProvider {
 
-	@Override
+	
 	public Object getInstance() {
 		return new GcpMemCache();
 	}

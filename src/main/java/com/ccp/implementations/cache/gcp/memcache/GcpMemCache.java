@@ -31,7 +31,7 @@ class GcpMemCache implements CcpCache {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public <V> V get(String key, CcpJsonRepresentation values, CcpMapTransform<V> taskToGetValue, int cacheSeconds) {
 
 		Object object = this.get(key);
@@ -46,7 +46,7 @@ class GcpMemCache implements CcpCache {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public <V> V getOrDefault(String key, V defaultValue) {
 		Object object = this.get(key);
 		
@@ -58,7 +58,7 @@ class GcpMemCache implements CcpCache {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public <V> V getOrThrowException(String key, RuntimeException e) {
 		Object object = this.get(key);
 		
@@ -69,13 +69,13 @@ class GcpMemCache implements CcpCache {
 		return (V) object;
 	}
 
-	@Override
+	
 	public boolean isPresent(String key) {
 		boolean isPresent = this.get(key) != null;
 		return isPresent;
 	}
 
-	@Override
+	
 	public void put(String key, Object value, int secondsDelay) {
 		Expiration arg2 = Expiration.byDeltaSeconds(secondsDelay);
 		if(value instanceof CcpJsonRepresentation) {
@@ -87,7 +87,7 @@ class GcpMemCache implements CcpCache {
 	}
 
 	@SuppressWarnings("unchecked")
-	@Override
+	
 	public <V> V remove(String key) {
 		
 		V t = (V) this.get(key);
