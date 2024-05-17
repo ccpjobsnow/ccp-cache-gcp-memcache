@@ -2,10 +2,10 @@ package com.ccp.implementations.cache.gcp.memcache;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 import com.ccp.decorators.CcpJsonRepresentation;
 import com.ccp.especifications.cache.CcpCache;
-import com.ccp.process.CcpMapTransform;
 import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
@@ -32,14 +32,14 @@ class GcpMemCache implements CcpCache {
 
 	@SuppressWarnings("unchecked")
 	
-	public <V> V get(String key, CcpJsonRepresentation values, CcpMapTransform<V> taskToGetValue, int cacheSeconds) {
+	public <V> V get(String key, CcpJsonRepresentation values, Function<CcpJsonRepresentation, V> taskToGetValue, int cacheSeconds) {
 
 		Object object = this.get(key);
 
 		if (object != null) {
 			return (V) object;
 		}
-		V value = taskToGetValue.transform(values);
+		V value = taskToGetValue.apply(values);
 		this.put(key, value, cacheSeconds);
 
 		return value;
