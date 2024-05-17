@@ -88,7 +88,7 @@ class GcpMemCache implements CcpCache {
 
 	@SuppressWarnings("unchecked")
 	
-	public <V> V remove(String key) {
+	public <V> V delete(String key) {
 		
 		V t = (V) this.get(key);
 		
