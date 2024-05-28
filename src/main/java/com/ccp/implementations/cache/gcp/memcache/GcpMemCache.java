@@ -31,15 +31,14 @@ class GcpMemCache implements CcpCache {
 	}
 
 	@SuppressWarnings("unchecked")
-	
-	public <V> V get(String key, CcpJsonRepresentation values, Function<CcpJsonRepresentation, V> taskToGetValue, int cacheSeconds) {
+	public <V> V get(String key, CcpJsonRepresentation json, Function<CcpJsonRepresentation, V> taskToGetValue, int cacheSeconds) {
 
 		Object object = this.get(key);
 
 		if (object != null) {
 			return (V) object;
 		}
-		V value = taskToGetValue.apply(values);
+		V value = taskToGetValue.apply(json);
 		this.put(key, value, cacheSeconds);
 
 		return value;
