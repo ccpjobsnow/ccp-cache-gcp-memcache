@@ -5,7 +5,7 @@ import com.ccp.especifications.cache.CcpCache;
 
 public class CcpGcpMemCache implements CcpInstanceProvider<CcpCache> {
 
-	
+	//FIXME CACHE LOCAL
 	public CcpCache getInstance() {
 		return new GcpMemCache();
 	}
