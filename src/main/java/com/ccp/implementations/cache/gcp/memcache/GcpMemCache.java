@@ -14,7 +14,7 @@ class GcpMemCache implements CcpCache {
 	private static MemcacheService memcacheService = MemcacheServiceFactory.getMemcacheService();
 
 	@SuppressWarnings("unchecked")
-	private Object get(String key) {
+	public Object get(String key) {
 
 		Object object = memcacheService.get(key);
 
@@ -29,7 +29,6 @@ class GcpMemCache implements CcpCache {
 		CcpJsonRepresentation jr = new CcpJsonRepresentation(map);
 		return jr;
 	}
-
 	@SuppressWarnings("unchecked")
 	public <V> V get(String key, CcpJsonRepresentation json, Function<CcpJsonRepresentation, V> taskToGetValue, int cacheSeconds) {
 
