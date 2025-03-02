@@ -31,14 +31,14 @@ class GcpMemCache implements CcpCache {
 	}
 
 
-	public void put(String key, Object value, int secondsDelay) {
+	public CcpCache put(String key, Object value, int secondsDelay) {
 		Expiration arg2 = Expiration.byDeltaSeconds(secondsDelay);
 		if(value instanceof CcpJsonRepresentation) {
 			CcpJsonRepresentation jr = (CcpJsonRepresentation)value;
 			value = new LinkedHashMap<>(jr.content);
 		}
 		memcacheService.put(key, value, arg2);
-
+		return this;
 	}
 
 	@SuppressWarnings("unchecked")
